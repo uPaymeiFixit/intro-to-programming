@@ -116,13 +116,13 @@ function f(x) {
  * what we'll focus on for now. After the declaration we name our function. I
  * named it f, but you could have named it anything that follows the same rules
  * as naming a variable. After that we'll specify the parameters the function
- * accepts. In our case it's just "x" but we could have named it anything. Then
- * we surround our code in curly braces ({}) to tell the interpreter that all
- * of the code in between the curly braces belongs to the function. We also
- * returned a value in this function, we'll go over how this works in more
- * detail later but in short it allows us to get information out of the
- * function, or another way to think about it is assigning the function a
- * dynamic value.
+ * accepts. Parameters are just like variables. Here, we chose "x" as the name
+ * but we could have named it anything like a variable. Then we surround our
+ * code in curly braces { } to tell the interpreter that all of the code in
+ * between the curly braces belongs to that function. We also returned a value
+ * in this function, we'll go over how this works in more detail later but in
+ * short it allows us to get information out of the function, or another way to
+ * think about it is assigning the function a dynamic value.
  *
  * We can call this function like this:
  */

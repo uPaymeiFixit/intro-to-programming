@@ -487,7 +487,11 @@ let keyboard_array3 = [...keyboard_array];
  * functionally identical to fibonacci1 and fibonacci2, but it looks weird.
  */
 function fibonacci3(n) {
-  for (array = [0, 1]; array.length <= n + 1; array.push(array[array.length - 2] + array[array.length - 1])) {}
+  for (
+    array = [0, 1];
+    array.length <= n + 1;
+    array.push(array[array.length - 2] + array[array.length - 1])
+  ) {}
   return array;
 }
 

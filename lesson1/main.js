@@ -184,12 +184,12 @@ bmi(user_name, 175, 5, 11);
  * provided by our browser, which you may think of as the browser's API. The
  * first and probably most useful set of functions belong to the "Math" object.
  */
-console.log("The square root of 49 is",        Math.sqrt(49)    ); // 7
-console.log("5.45 gets rounded to",            Math.round(5.45) ); // 5
-console.log("We can round 3.1 up to",          Math.ceil(3.1)   ); // 4
-console.log("We can round 3.9 down to",        Math.floor(3.9)  ); // 3
-console.log("2^5 is",                          Math.pow(2, 5)   ); // 32
-console.log("Random number between 0 and 1: ", Math.random()    ); // ??
+console.log("The square root of 49 is",       Math.sqrt(49)    ); // 7
+console.log("5.45 gets rounded to",           Math.round(5.45) ); // 5
+console.log("We can round 3.1 up to",         Math.ceil(3.1)   ); // 4
+console.log("We can round 3.9 down to",       Math.floor(3.9)  ); // 3
+console.log("2^5 is",                         Math.pow(2, 5)   ); // 32
+console.log("Random number between 0 and 1:", Math.random()    ); // ??
 
 /**
  * For more details on the Math object and the many more functions it contains

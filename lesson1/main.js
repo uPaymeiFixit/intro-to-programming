@@ -205,7 +205,7 @@ console.log("The height of the window is", window.innerHeight);
 // onclick is to be assigned a function which will be called when we click
 window.onclick = function showAlert() {
   // "alert" will pop up a message
-  alert("This alert pops up when you click on the page");
+  window.alert("This alert pops up when you click on the page");
 }
 
 /**

@@ -539,7 +539,7 @@ let player2 = player;
  * There are several ways to copy objects, all have their pros and cons, but
  * we'll be using this way:
  */
-let player3 = Object.assign({}, player);
+let player3 = {...player};
 
 
 /**

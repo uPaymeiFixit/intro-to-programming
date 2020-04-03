@@ -56,12 +56,12 @@
  */
 let a = 10;
 /**
- * The "let" portion of this line, which is called the declaration, tells the
+ * The `let` portion of this line, which is called the declaration, tells the
  * language interpreter (the browser runtime) that we will be declaring a
  * variable. It's also useful to know, even though we won't use them in this
- * file, that there are alternative declarations to "let" such as "const".
+ * file, that there are alternative declarations to `let` such as `const`.
  *
- * After the declaration we specify the variable name. I chose "a" to be my
+ * After the declaration we specify the variable name. I chose `a` to be my
  * variable name, but we could have chosen anything that doesn't contain spaces
  * or some symbols, or starts with a number. For example I could also define
  * the following variable:
@@ -108,15 +108,15 @@ console.log("Hello,", user_name);
  */
 
 function f(x) {
-  return x + x; // Yes, "2 * x" would have worked too
+  return x + x; // Yes, `2 * x` would have worked too
 }
 /**
- * We declare a function using the "function" keyword. There are other ways to
+ * We declare a function using the `function` keyword. There are other ways to
  * declare a function, and this isn't the same for every language, but it's
  * what we'll focus on for now. After the declaration we name our function. I
  * named it f, but you could have named it anything that follows the same rules
  * as naming a variable. After that we'll specify the parameters the function
- * accepts. Parameters are just like variables. Here, we chose "x" as the name
+ * accepts. Parameters are just like variables. Here, we chose `x` as the name
  * but we could have named it anything like a variable. Then we surround our
  * code in curly braces { } to tell the interpreter that all of the code in
  * between the curly braces belongs to that function. We also returned a value
@@ -169,7 +169,7 @@ function bmi(name, weight_in_pounds, partial_height_feet, partial_height_inches)
 /**
  * Phew, that was a lot. Hopefully it all made sense. The only tricky thing we
  * did that might catch people of guard is we did not return a value. That's
- * okay, it's not required. The returned value of bmi_male will be "void", but
+ * okay, it's not required. The returned value of bmi_male will be `void`, but
  * the function will work properly. It does everything we want it to, including
  * logging what the user's BMI is. Lets try running it below:
  */
@@ -181,7 +181,7 @@ bmi(user_name, 175, 5, 11);
  * aimed at getting information from or providing information to an application.
  * In our case the application will be the browser. Lets look at some functions
  * provided by our browser, which you may think of as the browser's API. The
- * first and probably most useful set of functions belong to the "Math" object.
+ * first and probably most useful set of functions belong to the `Math` object.
  */
 console.log("The square root of 49 is",       Math.sqrt(49)    ); // 7
 console.log("5.45 gets rounded to",           Math.round(5.45) ); // 5
@@ -195,7 +195,7 @@ console.log("Random number between 0 and 1:", Math.random()    ); // ??
  * visit https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math
  *
  * Those are most of the Math functions that will be useful to us, so now lets
- * look at a few "window" functions and variables. These usually relate to the
+ * look at a few `window` functions and variables. These usually relate to the
  * actual window that you have open.
  */
 
@@ -204,7 +204,7 @@ console.log("The width of this window is", window.innerWidth);
 console.log("The height of the window is", window.innerHeight);
 // onclick is to be assigned a function which will be called when we click
 window.onclick = function showAlert() {
-  // "alert" will pop up a message
+  // `alert` will pop up a message
   window.alert("This alert pops up when you click on the page");
 }
 
@@ -217,7 +217,7 @@ window.onclick = function showAlert() {
 /**
  * We'll move onto another topic: if statements! AKA poor man's artificial
  * intelligence. if statements are no more than a special type of function. You
- * call a function called "if", and it takes one parameter: a true or false
+ * call a function called `if`, and it takes one parameter: a true or false
  * statement. If the statement is true, the code in the curly braces will run,
  * otherwise it will be skipped. Here's a simple example:
  */
@@ -308,12 +308,12 @@ for (let i = 0; i < 10; i = i + 1) {
  * nothing at all. In 99% of cases it will be used to define our iterator
  * variable. Most people, including me in this case, named the iterator i.
  * Some people will dock points off of your assignments if you use the
- * incredibly common "i" variable name; I'm looking at you, Professor James
+ * incredibly common `i` variable name; I'm looking at you, Professor James
  * Hester ;)
  * The second part of the for loop header is the conditional statement. This
  * is similar to the body of a for loop in that it takes a true or false
  * (boolean) statement. If the statement evaluates to true, the loop will
- * continue to run. In most cases this will be "i < N" where N is the number of
+ * continue to run. In most cases this will be `i < N` where N is the number of
  * times the loop should run. Our loop above runs 10 times, from 0 to 9.
  * The last part of the loop header can also be used for anything you want, but
  * in most cases it's used to increment the iterator. We're adding 1 to i every
@@ -325,10 +325,10 @@ for (let i = 0; i < 10; i = i + 1) {
  * There's something we should mention, and I can't find a better place to
  * interject it than here. There is shorthand we'll be using ahead of here:
  */
-a += 5; // This adds 5 to the variable "a". Equivalent to "a = a + 5"
-a++; // Increments "a" by 1. Equivalent to "a = a + 1"
-a--; // Decrements "a" by 1. Equivalent to "a = a - 1";
-// In the for loop above we could have replaced "i = i + 1" with "i++"
+a += 5; // This adds 5 to the variable `a`. Equivalent to `a = a + 5`
+a++; // Increments `a` by 1. Equivalent to `a = a + 1`
+a--; // Decrements `a` by 1. Equivalent to `a = a - 1`;
+// In the for loop above we could have replaced `i = i + 1` with `i++`
 
 /**
  * Remember the fibonacci sequence? 0 1 1 2 3 4 5 ... We get the next number
@@ -338,7 +338,7 @@ a--; // Decrements "a" by 1. Equivalent to "a = a - 1";
  *         1 + 2 = 3
  *             2 + 3 = 5
  *                 3 + 5 = 8
- * We could use a for loop to calculate the first "n" fibonacci numbers like so:
+ * We could use a for loop to calculate the first `n` fibonacci numbers like so:
  */
 
 // Calculates first n fibonacci numbers
@@ -347,9 +347,9 @@ function fibonacci(n) {
   let n1 = 0;
   let n2 = 1;
   // We'll also keep a record of these numbers in a string
-  let sequence = n1 + ", " + n2; // Right now this is equivalent to "0, 1"
-  // Now we'll define our loop, which will simply run the code "n" times. Note
-  // we never even end up using the "i" variable other than in the header.
+  let sequence = n1 + ", " + n2; // Right now this is equivalent to `0, 1`
+  // Now we'll define our loop, which will simply run the code `n` times. Note
+  // we never even end up using the `i` variable other than in the header.
   for (let i = 0; i < n; i++) {
     // The "current" fibonacci number, n3, is calculated by adding the previous
     // two numbers, n1 and n2.
@@ -399,7 +399,7 @@ keyboard_array[8] = 'o';
 keyboard_array.push('p');
 /**
  * Another useful Array function is Array.splice(i, n). We use this to remove
- * "n" elements from the array starting at position "i". For example, if we
+ * `n` elements from the array starting at position "i". For example, if we
  * wanted to remove 'r' from our keyboard_array, we would do the following:
  */
 keyboard_array.splice(3, 1);
@@ -445,8 +445,8 @@ function fibonacci2(n) {
   // Define first two fibonacci numbers manually, 0 and 1
   // This will also hold a record of all the fibonacci numbers
   let fibonacci_array = [0, 1];
-  // Now we'll define our loop, which will simply run the code "n" times. Note
-  // we never even end up using the "i" variable other than in the header.
+  // Now we'll define our loop, which will simply run the code `n` times. Note
+  // we never even end up using the `i` variable other than in the header.
   for (let i = 0; i < n; i++) {
     // We push the "current" fibonacci number onto the array by adding
     // the previous two numbers, fibonacci_array[i] and fibonacci_array[i + 1]

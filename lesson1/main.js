@@ -80,8 +80,8 @@ let user_name = "Josh Gibbs";
  * The last thing you may have noticed is the semicolon at the end of the line.
  * This tells the JavaScript interpreter that it has reached the end of the
  * line. Not all languages (python) use semicolons to end a line, but most do.
- * Like the variable declaration, your JavaScript interpreter will likely be
- * forgiving if you forget this. JavaScript is very forgiving...
+ * Your JavaScript interpreter will likely be forgiving if you forget this, but
+ * it's best to include it. JavaScript is very forgiving...
  */
 
 /**

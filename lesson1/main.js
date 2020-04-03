@@ -1,10 +1,12 @@
-/* STOP! It's very important that you have a text editor that supports
+/**
+ * STOP! It's very important that you have a text editor that supports
  * syntax highlighting while reading and editing this document. If all of this
  * text is simply black and white I highly recommend you download and use
  * Sublime Text (https://www.sublimetext.com/) to read and edit this document.
  */
 
-/* Welcome! I've had a few people ask me how to program lately, and felt like
+/**
+ * Welcome! I've had a few people ask me how to program lately, and felt like
  * this would be a decent way to start learning. I'd love to improve this as
  * much as possible, so if you have any feedback, or there was anything unclear,
  * please let me know. You can email me at josh@gibbs.tk or make an issue on
@@ -48,11 +50,13 @@
 
 // You can also start a comment with two slashes (//) too, which is more common
 
-/* Just as in math we might want define a constant variable like a = 10,
+/**
+ * Just as in math we might want define a constant variable like a = 10,
  * we do the same when programming like this:
  */
 let a = 10;
-/* The "let" portion of this just, which is called the declaration, tells the
+/**
+ * The "let" portion of this just, which is called the declaration, tells the
  * language interpreter (the browser)  that we will be declaring a variable.
  * Most interpreters will still understand if you forget this. It's also useful
  * to know, even though we won't use them in this file, that there are
@@ -64,7 +68,8 @@ let a = 10;
  * following variable:
  * */
 let Much_longer_variable_name1337 = 42;
-/* We set that variable name equal to (=) whatever value we want it to be. This
+/**
+ * We set that variable name equal to (=) whatever value we want it to be. This
  * section could be very long, but in order to keep it short we'll briefly
  * mention that JavaScript lets us assign almost anything to a variable, not
  * just numbers, but we won't worry as much about that. For this we'll focus on
@@ -72,14 +77,16 @@ let Much_longer_variable_name1337 = 42;
  * it with quotes like this:
  */
 let user_name = "Josh Gibbs";
-/* The last thing you may have noticed is the semicolon at the end of the line.
+/**
+ * The last thing you may have noticed is the semicolon at the end of the line.
  * This tells the JavaScript interpreter that it has reached the end of the
  * line. Not all languages (python) use semicolons to end a line, but most do.
  * Like the variable declaration, your JavaScript interpreter will likely be
  * forgiving if you forget this. JavaScript is very forgiving...
  */
 
-/* Now lets learn about logging. Sometimes its helpful to see what the output
+/**
+ * Now lets learn about logging. Sometimes its helpful to see what the output
  * of a function or the value of a variable is while the code is running. Here
  * are a few examples of how you can do this:
  */
@@ -88,12 +95,14 @@ console.log(a);
 console.log("The value of a =", a);
 console.log("The answer was " + Much_longer_variable_name1337);
 console.log("Hello,", user_name);
-/* You can see the output of all of these by right clicking on the web page in
+/**
+ * You can see the output of all of these by right clicking on the web page in
  * the browser, clicking "Inspect", and then switching to the "Console" tab.
  * You should see the output in that window.
  */
 
-/* The next concept gets a little more complicated: functions. Just like in
+/**
+ * The next concept gets a little more complicated: functions. Just like in
  * math, functions take an input, process the data, and produce an output. I'll
  * show you an example of a function that simply doubles a number: x, and then
  * explain how it works:
@@ -102,7 +111,8 @@ console.log("Hello,", user_name);
 function f(x) {
   return x + x; // Yes, "2 * x" would have worked too
 }
-/* We declare a function using the "function" keyword. There are other ways to
+/**
+ * We declare a function using the "function" keyword. There are other ways to
  * declare a function, and this isn't the same for every language, but it's
  * what we'll focus on for now. After the declaration we name our function. I
  * named it f, but you could have named it anything that follows the same rules
@@ -118,18 +128,21 @@ function f(x) {
  * We can call this function like this:
  */
 f(4);
-/* We called it! It assigned the value we passed in, 4, to x and then returned
+/**
+ * We called it! It assigned the value we passed in, 4, to x and then returned
  * 4 + 4. Fascinating but useless, because we didn't do anything with that
  * data. Lets do it again, but this time lets assign it to a variable and then
  * print the value of that variable:
  */
 let doubled_number = f(4);
 console.log("The output of f(4) =", doubled_number);
-/* We should see 8 printed in the console now. We could have also called f(4)
+/**
+ * We should see 8 printed in the console now. We could have also called f(4)
  * inline with the same result like this:
  */
 console.log("The output of f(4) =", f(4));
-/* Both of these are functionally the same.
+/**
+ * Both of these are functionally the same.
  *
  *
  * Lets look at a much more complicated example, incorporating everything we've
@@ -154,7 +167,8 @@ function bmi(name, weight_in_pounds, partial_height_feet, partial_height_inches)
   console.log(name + "'s BMI is", bmi_value);
 }
 
-/* Phew, that was a lot. Hopefully it all made sense. The only tricky thing we
+/**
+ * Phew, that was a lot. Hopefully it all made sense. The only tricky thing we
  * did that might catch people of guard is we did not return a value. That's
  * okay, it's not required. The returned value of bmi_male will be "void", but
  * the function will work properly. It does everything we want it to, including
@@ -162,7 +176,8 @@ function bmi(name, weight_in_pounds, partial_height_feet, partial_height_inches)
  */
 bmi(user_name, 175, 5, 11);
 
-/* Moving on with functions, we'll briefly touch on Application Programming
+/**
+ * Moving on with functions, we'll briefly touch on Application Programming
  * Interfaces (APIs). For the most part, APIs are a collection of functions
  * aimed at getting information from or providing information to an application.
  * In our case the application will be the browser. Lets look at some functions
@@ -176,7 +191,8 @@ console.log("We can round 3.9 down to",        Math.floor(3.9)  ); // 3
 console.log("2^5 is",                          Math.pow(2, 5)   ); // 32
 console.log("Random number between 0 and 1: ", Math.random()    ); // ??
 
-/* For more details on the Math object and the many more functions it contains
+/**
+ * For more details on the Math object and the many more functions it contains
  * visit https://www.w3schools.com/js/js_math.asp
  *
  * Those are most of the Math functions that will be useful to us, so now lets
@@ -193,12 +209,14 @@ window.onclick = function showAlert() {
   alert("This alert pops up when you click on the page");
 }
 
-/* Hopefully these API functions / variables make sense. Just know that these
+/**
+ * Hopefully these API functions / variables make sense. Just know that these
  * exist and we can take advantage of them later. For example, we may need to
  * know whe width of the window to know when an enemy goes off the page.
  */
 
-/* We'll move onto another topic: if statements! AKA poor man's artificial
+/**
+ * We'll move onto another topic: if statements! AKA poor man's artificial
  * intelligence. if statements are no more than a special type of function. You
  * call a function called "if", and it takes one parameter: a true or false 
  * statement. If the statement is true, the code in the curly braces will run,
@@ -236,7 +254,8 @@ if (10 != 5) {
   console.log("Correct! 10 does not equal 5!");
 }
 
-/* Now we'll introduce else if and else statements. These can be added onto an
+/**
+ * Now we'll introduce else if and else statements. These can be added onto an
  * if statement if we want to run different blocks of code for different 
  * scenarios.
  * */
@@ -250,7 +269,8 @@ if (false) {
 
 // Lets try a practical example
 let my_bmi = 24.4; 
-/* For a fun exercise modify the bmi function we wrote earlier so that we can
+/**
+ * For a fun exercise modify the bmi function we wrote earlier so that we can
  * write the line above like this: 
  * let mi_bmi = bmi(user_name, 175, 5, 11);
  * HINT: we'll need to add a return statement to the end of the bmi function
@@ -265,11 +285,13 @@ if (my_bmi < 18.5) {
   console.log("Obese");
 }
 
-/* For another fun exercise, try to re-write the bmi function to tell us what
+/**
+ * For another fun exercise, try to re-write the bmi function to tell us what
  * our BMI category is instead of the raw BMI value.
  */
 
-/* I hope you're not as tired of reading this as I am of writing it. We're gonna
+/**
+ * I hope you're not as tired of reading this as I am of writing it. We're gonna
  * cover for loops in as much detail as I can muster now.
  *
  * Often times we need to process lots of things. Maybe its fields in a PDF or
@@ -281,7 +303,8 @@ if (my_bmi < 18.5) {
 for (let i = 0; i < 10; i = i + 1) {
   console.log(i);
 }
-/* There's a lot going on here, so lets do our best to break it down. A for loop
+/**
+ * There's a lot going on here, so lets do our best to break it down. A for loop
  * has three parts in its header. The first part can do whatever you like, or
  * nothing at all. In 99% of cases it will be used to define our iterator 
  * variable. Most people, including me in this case, named the iterator i.
@@ -298,14 +321,16 @@ for (let i = 0; i < 10; i = i + 1) {
  * time the loop runs in our case.
  * As a result we're logging numbers 0 through 9 with the above loop. */
 
-/* There's something we should mention, and I can't find a better place to 
+/**
+ * There's something we should mention, and I can't find a better place to 
  * interject it than here. There is shorthand we'll be using ahead of here: */
 a += 5; // This adds 5 to the variable "a". Equivalent to "a = a + 5"
 a++; // Increments "a" by 1. Equivalent to "a = a + 1"
 a--; // Decrements "a" by 1. Equivalent to "a = a - 1";
 // In the for loop above we could have replaced "i = i + 1" with "i++"
 
-/* Remember the fibonacci sequence? 0 1 1 2 3 4 5 ... We get the next number
+/**
+ * Remember the fibonacci sequence? 0 1 1 2 3 4 5 ... We get the next number
  * by adding the two previous numbers.
  * 0 + 1 = 1
  *     1 + 1 = 2
@@ -345,7 +370,8 @@ function fibonacci(n) {
 // Lets calculate the first 5 fibonacci numbers:
 console.log("Fibonacci:", fibonacci(5));
 
-/* Lets take a quick break from for loops, because we're going to get more
+/**
+ * Lets take a quick break from for loops, because we're going to get more
  * practice with them in a minute. The next topic is arrays. An array is a data
  * structure (a way data is organized) where some number (sometimes an 
  * undefined number) of variables are are held in a sort of "collection" and
@@ -355,20 +381,23 @@ console.log("Fibonacci:", fibonacci(5));
 let keyboard_array = ['q', 'w', 'e', 'r', 't', 'y', 'u', 'i'];
 // We can access the Nth element in the array like this:
 console.log("The fifth letter on the keyboard is" , keyboard_array[5]);
-/* You should see 'y' in the browser's console. No, you didn't count wrong, 
+/**
+ * You should see 'y' in the browser's console. No, you didn't count wrong, 
  * arrays in JavaScript (and many other languages) start at an index of 0. So
  * 'q' is the 0th element, and 'y' is the 5th. 
  *
  * We could add elements to the array like so:
  */
 keyboard_array[8] = 'o';
-/* Arrays also come with LOTS of helper functions. You can read about many of 
+/**
+ * Arrays also come with LOTS of helper functions. You can read about many of 
  * them here if you'd like https://www.w3schools.com/js/js_array_methods.asp
  * but for now we'll focus on only a few. The first, Array.push(), adds an 
  * element to the end of the array, like so:
  */
 keyboard_array.push('p');
-/* Another useful Array function is Array.splice(i, n). We use this to remove
+/**
+ * Another useful Array function is Array.splice(i, n). We use this to remove
  * "n" elements from the array starting at position "i". For example, if we
  * wanted to remove 'r' from our keyboard_array, we would do the following:
  */
@@ -377,7 +406,8 @@ keyboard_array.splice(3, 1);
 // We can print our arrays just like any other variable:
 console.log(keyboard_array);
 
-/* Arrays can hold any type of data. Numbers, characters, strings, even other 
+/**
+ * Arrays can hold any type of data. Numbers, characters, strings, even other 
  * arrays and functions. Lets look over another example just for some practice:
  */
 let demo_array = [1, 2, 3]; 
@@ -388,18 +418,21 @@ let sum = 0;
 for (let i = 0; i < 4; i++) {
   sum += demo_array[i];
 }
-/* If we break this loop down step by step it looks like this:
+/**
+ * If we break this loop down step by step it looks like this:
  * sum += demo_array[0] -> 0 += 1
  * sum += demo_array[1] -> 1 += 2
  * sum += demo_array[2] -> 3 += 3
  * sum += demo_array[3] -> 6 += 4
  */
 console.log("Sum of numbers =", sum); // 10
-/* Another useful Array feature we should talk about is Array.length. This is
+/**
+ * Another useful Array feature we should talk about is Array.length. This is
  * simply the number of items in an array. For example:
  */
 console.log("Our demo_array has", demo_array.length, "elements.");
-/* In our for loop header above we could have replaced 'i < 4' with
+/**
+ * In our for loop header above we could have replaced 'i < 4' with
  * 'i < demo_array.length'. This would help prevent errors in the case that
  * we add or remove numbers from the array.
  */
@@ -427,7 +460,8 @@ function fibonacci2(n) {
 // Lets calculate the first 5 fibonacci numbers using our new method:
 console.log("Fibonacci:", fibonacci2(5));
 
-/* There is an important thing to know about arrays (and Objects which we'll
+/**
+ * There is an important thing to know about arrays (and Objects which we'll
  * cover in a minute) that may save you hours of debugging: array and object
  * variables are simply a reference to the array or object. What does this mean?
  * It means the `keyboard_array` variable actually just stores an address of 
@@ -439,7 +473,8 @@ console.log("Fibonacci:", fibonacci2(5));
  * so I want to copy `keyboard_array`. I would normally do:
  */
 let keyboard_array2 = keyboard_array;
-/* But this will have some unexpected consequences. Both of the variables are
+/**
+ * But this will have some unexpected consequences. Both of the variables are
  * now set to an address of a chunk of memory, not the actual array. So when I
  * add keyboard_array2.push('a'), I'll actually be adding `a` to the original
  * `keyboard_array` too.
@@ -448,7 +483,8 @@ let keyboard_array2 = keyboard_array;
  */
 let keyboard_array3 = [...keyboard_array];
 
-/* To finish up arrays, see if you can figure out how this function works. It's
+/**
+ * To finish up arrays, see if you can figure out how this function works. It's
  * functionally identical to fibonacci1 and fibonacci2, but it looks weird.
  */
 function fibonacci3(n) {
@@ -456,7 +492,8 @@ function fibonacci3(n) {
   return array;
 }
 
-/* Lets finish up this lesson / chapter / whatever this has turned into with 
+/**
+ * Lets finish up this lesson / chapter / whatever this has turned into with 
  * Objects. Objects are simply a collection of data. For example, we may want 
  * to collect and store information about a player in a game. We can define
  * an object like so:
@@ -468,7 +505,8 @@ let player = {
   y_position: Math.random() * window.innerHeight,
   color: 'blue'
 };
-/* We now have a player object with a `name` property set to "Josh Gibbs", an
+/**
+ * We now have a player object with a `name` property set to "Josh Gibbs", an
  * `age` property set to 25, an `x_position` set to a random number between
  * 0 and 1000, a `y_position` set to a random number between 0 and the height of
  * the browser window (in pixels), and a `color` of blue.
@@ -480,7 +518,8 @@ console.log(player.name, "is", player.age, "years old.");
 // We can add new elements to an object like this:
 player.username = "uPaymeiFixit";
 
-/* For the most part that's the extent of how you'll interact with arrays.
+/**
+ * For the most part that's the extent of how you'll interact with arrays.
  * Before we finish lets review how objects and arrays are passed by reference,
  not value. This means if you try to copy an object by setting one object equal
  * to another, they will both reference the same object. For  example, lets say
@@ -488,7 +527,8 @@ player.username = "uPaymeiFixit";
  * name, so I want to copy `player`. I would normally do:
  */
 let player2 = player;
-/* This has the same pitfall of copying arrays this way: both of them are now 
+/**
+ * This has the same pitfall of copying arrays this way: both of them are now 
  * set to an address of a chunk of memory, not the actual object. So when I
  * change player2.name = "Bob Dylan", I'll actually be changing `player`'s name 
  * too.
@@ -499,7 +539,8 @@ let player2 = player;
 let player3 = Object.assign({}, player);
 
 
-/* Congratulations! You now have a basic understanding of programming and
+/**
+ * Congratulations! You now have a basic understanding of programming and
  * JavaScript! With everything you've learned here, you can create just about
  * anything. There are always more efficient ways to do things, like shorthand
  * functions: `() => {}` or for in loops in JavaScript, the idea of singletons,

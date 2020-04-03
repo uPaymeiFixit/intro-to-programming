@@ -193,7 +193,7 @@ console.log("Random number between 0 and 1:", Math.random()    ); // ??
 
 /**
  * For more details on the Math object and the many more functions it contains
- * visit https://www.w3schools.com/js/js_math.asp
+ * visit https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math
  *
  * Those are most of the Math functions that will be useful to us, so now lets
  * look at a few "window" functions and variables. These usually relate to the
@@ -391,7 +391,7 @@ console.log("The fifth letter on the keyboard is" , keyboard_array[5]);
 keyboard_array[8] = 'o';
 /**
  * Arrays also come with LOTS of helper functions. You can read about many of
- * them here if you'd like https://www.w3schools.com/js/js_array_methods.asp
+ * them here if you'd like https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array
  * but for now we'll focus on only a few. The first, Array.push(), adds an
  * element to the end of the array, like so:
  */

@@ -48,7 +48,7 @@
  * "self-documenting" code, no matter how good it is...Louis.
  */
 
-// You can also start a comment with two slashes (//) too, which is more common
+// You can start a comment with two slashes (//) too, which is more common
 
 /**
  * Just as in math we might want define a constant variable like a = 10,

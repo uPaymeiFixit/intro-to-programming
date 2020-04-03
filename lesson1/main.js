@@ -233,23 +233,23 @@ if (10 > 1) {
   // true
 }
 
-// When comparing if two numbers are equal, we use two equal signs (==)
-if (5 == 5) {
+// When comparing if two numbers are equal, we use 3 equal signs (===)
+if (5 === 5) {
   // true
 }
 
 // We can check multiple statements by using &&
-if ((a == 10) && (f(a) >= 20)) {
+if ((a === 10) && (f(a) >= 20)) {
   console.log("You probably haven't modified any code.");
 }
 
 // We can check one or the other (or both) statements using ||
-if ((user_name == "Josh Gibbs") || false) {
+if ((user_name === "Josh Gibbs") || false) {
   console.log("Name is still set to Josh Gibbs");
 }
 
 // We can check if something is not equal by putting a ! in front
-if (10 != 5) {
+if (10 !== 5) {
   console.log("Correct! 10 does not equal 5!");
 }
 

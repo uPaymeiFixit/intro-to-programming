@@ -197,7 +197,7 @@ console.log("Random number between 0 and 1: ", Math.random()    ); // ??
  *
  * Those are most of the Math functions that will be useful to us, so now lets
  * look at a few "window" functions and variables. These usually relate to the
- * actual window that you have open. 
+ * actual window that you have open.
  */
 
  // innerWidth and innerHeight are variables that change with the window size
@@ -218,7 +218,7 @@ window.onclick = function showAlert() {
 /**
  * We'll move onto another topic: if statements! AKA poor man's artificial
  * intelligence. if statements are no more than a special type of function. You
- * call a function called "if", and it takes one parameter: a true or false 
+ * call a function called "if", and it takes one parameter: a true or false
  * statement. If the statement is true, the code in the curly braces will run,
  * otherwise it will be skipped. Here's a simple example:
  */
@@ -256,7 +256,7 @@ if (10 != 5) {
 
 /**
  * Now we'll introduce else if and else statements. These can be added onto an
- * if statement if we want to run different blocks of code for different 
+ * if statement if we want to run different blocks of code for different
  * scenarios.
  * */
 if (false) {
@@ -268,10 +268,10 @@ if (false) {
 }
 
 // Lets try a practical example
-let my_bmi = 24.4; 
+let my_bmi = 24.4;
 /**
  * For a fun exercise modify the bmi function we wrote earlier so that we can
- * write the line above like this: 
+ * write the line above like this:
  * let mi_bmi = bmi(user_name, 175, 5, 11);
  * HINT: we'll need to add a return statement to the end of the bmi function
  */
@@ -296,7 +296,7 @@ if (my_bmi < 18.5) {
  *
  * Often times we need to process lots of things. Maybe its fields in a PDF or
  * pixels in a picture, or enemies or bullets in a game. There are several types
- * of loops, and many ways to write a for loop, but we'll go over the classic 
+ * of loops, and many ways to write a for loop, but we'll go over the classic
  * for loop which is largely the same in most languages. Here's an example of a
  * simple for loop:
  */
@@ -306,23 +306,23 @@ for (let i = 0; i < 10; i = i + 1) {
 /**
  * There's a lot going on here, so lets do our best to break it down. A for loop
  * has three parts in its header. The first part can do whatever you like, or
- * nothing at all. In 99% of cases it will be used to define our iterator 
+ * nothing at all. In 99% of cases it will be used to define our iterator
  * variable. Most people, including me in this case, named the iterator i.
- * Some people will dock points off of your assignments if you use the 
+ * Some people will dock points off of your assignments if you use the
  * incredibly common "i" variable name; I'm looking at you, Professor James
  * Hester ;)
- * The second part of the for loop header is the conditional statement. This 
+ * The second part of the for loop header is the conditional statement. This
  * is similar to the body of a for loop in that it takes a true or false
  * (boolean) statement. If the statement evaluates to true, the loop will
  * continue to run. In most cases this will be "i < N" where N is the number of
- * times the loop should run. Our loop above runs 10 times, from 0 to 9. 
+ * times the loop should run. Our loop above runs 10 times, from 0 to 9.
  * The last part of the loop header can also be used for anything you want, but
  * in most cases it's used to increment the iterator. We're adding 1 to i every
  * time the loop runs in our case.
  * As a result we're logging numbers 0 through 9 with the above loop. */
 
 /**
- * There's something we should mention, and I can't find a better place to 
+ * There's something we should mention, and I can't find a better place to
  * interject it than here. There is shorthand we'll be using ahead of here: */
 a += 5; // This adds 5 to the variable "a". Equivalent to "a = a + 5"
 a++; // Increments "a" by 1. Equivalent to "a = a + 1"
@@ -353,7 +353,7 @@ function fibonacci(n) {
     // The "current" fibonacci number, n3, is calculated by adding the previous
     // two numbers, n1 and n2.
     let n3 = n1 + n2;
-    // Now we need to shift all the numbers down since we only care about the 
+    // Now we need to shift all the numbers down since we only care about the
     // current and previous number.
     n1 = n2;
     n2 = n3;
@@ -373,7 +373,7 @@ console.log("Fibonacci:", fibonacci(5));
 /**
  * Lets take a quick break from for loops, because we're going to get more
  * practice with them in a minute. The next topic is arrays. An array is a data
- * structure (a way data is organized) where some number (sometimes an 
+ * structure (a way data is organized) where some number (sometimes an
  * undefined number) of variables are are held in a sort of "collection" and
  * referenced by their position. Imagine we're putting the top row of letters on
  * your keyboard in an array. We would define that array like this:
@@ -382,17 +382,17 @@ let keyboard_array = ['q', 'w', 'e', 'r', 't', 'y', 'u', 'i'];
 // We can access the Nth element in the array like this:
 console.log("The fifth letter on the keyboard is" , keyboard_array[5]);
 /**
- * You should see 'y' in the browser's console. No, you didn't count wrong, 
+ * You should see 'y' in the browser's console. No, you didn't count wrong,
  * arrays in JavaScript (and many other languages) start at an index of 0. So
- * 'q' is the 0th element, and 'y' is the 5th. 
+ * 'q' is the 0th element, and 'y' is the 5th.
  *
  * We could add elements to the array like so:
  */
 keyboard_array[8] = 'o';
 /**
- * Arrays also come with LOTS of helper functions. You can read about many of 
+ * Arrays also come with LOTS of helper functions. You can read about many of
  * them here if you'd like https://www.w3schools.com/js/js_array_methods.asp
- * but for now we'll focus on only a few. The first, Array.push(), adds an 
+ * but for now we'll focus on only a few. The first, Array.push(), adds an
  * element to the end of the array, like so:
  */
 keyboard_array.push('p');
@@ -401,17 +401,17 @@ keyboard_array.push('p');
  * "n" elements from the array starting at position "i". For example, if we
  * wanted to remove 'r' from our keyboard_array, we would do the following:
  */
-keyboard_array.splice(3, 1); 
+keyboard_array.splice(3, 1);
 
 // We can print our arrays just like any other variable:
 console.log(keyboard_array);
 
 /**
- * Arrays can hold any type of data. Numbers, characters, strings, even other 
+ * Arrays can hold any type of data. Numbers, characters, strings, even other
  * arrays and functions. Lets look over another example just for some practice:
  */
-let demo_array = [1, 2, 3]; 
-demo_array.push(4); // Added 4 to the end of our array. 
+let demo_array = [1, 2, 3];
+demo_array.push(4); // Added 4 to the end of our array.
 
 // Now lets use a for loop to add all of these numbers up
 let sum = 0;
@@ -451,8 +451,8 @@ function fibonacci2(n) {
     // the previous two numbers, fibonacci_array[i] and fibonacci_array[i + 1]
     fibonacci_array.push(fibonacci_array[i] + fibonacci_array[i + 1]);
   }
-  
-  // We'll return the array so we can see all of the first n numbers in the 
+
+  // We'll return the array so we can see all of the first n numbers in the
   //fibonacci sequence.
   return fibonacci_array;
 }
@@ -464,12 +464,12 @@ console.log("Fibonacci:", fibonacci2(5));
  * There is an important thing to know about arrays (and Objects which we'll
  * cover in a minute) that may save you hours of debugging: array and object
  * variables are simply a reference to the array or object. What does this mean?
- * It means the `keyboard_array` variable actually just stores an address of 
- * your memory (RAM), not the actual data. You don't need to understand that, 
+ * It means the `keyboard_array` variable actually just stores an address of
+ * your memory (RAM), not the actual data. You don't need to understand that,
  * but you need to know that the reason matters is that if you try to copy an
  * array or object by setting one object equal to another, they will both
  * reference the same array or object. For example, lets say I want to make a
- * new array named `keyboard_array2` and I'm only going to add some characters, 
+ * new array named `keyboard_array2` and I'm only going to add some characters,
  * so I want to copy `keyboard_array`. I would normally do:
  */
 let keyboard_array2 = keyboard_array;
@@ -478,7 +478,7 @@ let keyboard_array2 = keyboard_array;
  * now set to an address of a chunk of memory, not the actual array. So when I
  * add keyboard_array2.push('a'), I'll actually be adding `a` to the original
  * `keyboard_array` too.
- * 
+ *
  * The proper way to copy the array would be a little JavaScript hack:
  */
 let keyboard_array3 = [...keyboard_array];
@@ -493,8 +493,8 @@ function fibonacci3(n) {
 }
 
 /**
- * Lets finish up this lesson / chapter / whatever this has turned into with 
- * Objects. Objects are simply a collection of data. For example, we may want 
+ * Lets finish up this lesson / chapter / whatever this has turned into with
+ * Objects. Objects are simply a collection of data. For example, we may want
  * to collect and store information about a player in a game. We can define
  * an object like so:
  */
@@ -510,7 +510,7 @@ let player = {
  * `age` property set to 25, an `x_position` set to a random number between
  * 0 and 1000, a `y_position` set to a random number between 0 and the height of
  * the browser window (in pixels), and a `color` of blue.
- * 
+ *
  * We can access pieces of data like this:
  */
 console.log(player.name, "is", player.age, "years old.");
@@ -528,12 +528,12 @@ player.username = "uPaymeiFixit";
  */
 let player2 = player;
 /**
- * This has the same pitfall of copying arrays this way: both of them are now 
+ * This has the same pitfall of copying arrays this way: both of them are now
  * set to an address of a chunk of memory, not the actual object. So when I
- * change player2.name = "Bob Dylan", I'll actually be changing `player`'s name 
+ * change player2.name = "Bob Dylan", I'll actually be changing `player`'s name
  * too.
- * 
- * There are several ways to copy objects, all have their pros and cons, but 
+ *
+ * There are several ways to copy objects, all have their pros and cons, but
  * we'll be using this way:
  */
 let player3 = Object.assign({}, player);
@@ -545,7 +545,7 @@ let player3 = Object.assign({}, player);
  * anything. There are always more efficient ways to do things, like shorthand
  * functions: `() => {}` or for in loops in JavaScript, the idea of singletons,
  * but you can accomplish everything using these tools while you learn the rest.
- * 
+ *
  * Take a break, maybe even a day to process and play around with this code, and
  * then open the `lesson2 folder where we'll start creating a game.
  */

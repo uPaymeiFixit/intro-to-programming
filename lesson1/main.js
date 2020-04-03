@@ -257,7 +257,7 @@ if (10 !== 5) {
  * Now we'll introduce else if and else statements. These can be added onto an
  * if statement if we want to run different blocks of code for different
  * scenarios.
- * */
+ */
 if (false) {
   // not going to run
 } else if (false) {
@@ -318,11 +318,13 @@ for (let i = 0; i < 10; i = i + 1) {
  * The last part of the loop header can also be used for anything you want, but
  * in most cases it's used to increment the iterator. We're adding 1 to i every
  * time the loop runs in our case.
- * As a result we're logging numbers 0 through 9 with the above loop. */
+ * As a result we're logging numbers 0 through 9 with the above loop.
+ */
 
 /**
  * There's something we should mention, and I can't find a better place to
- * interject it than here. There is shorthand we'll be using ahead of here: */
+ * interject it than here. There is shorthand we'll be using ahead of here:
+ */
 a += 5; // This adds 5 to the variable "a". Equivalent to "a = a + 5"
 a++; // Increments "a" by 1. Equivalent to "a = a + 1"
 a--; // Decrements "a" by 1. Equivalent to "a = a - 1";
@@ -478,7 +480,7 @@ let keyboard_array2 = keyboard_array;
  * add keyboard_array2.push('a'), I'll actually be adding `a` to the original
  * `keyboard_array` too.
  *
- * The proper way to copy the array would be a little JavaScript hack:
+ * The proper way to copy the array would be a little JavaScript trick:
  */
 let keyboard_array3 = [...keyboard_array];
 

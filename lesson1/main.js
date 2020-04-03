@@ -56,7 +56,7 @@
  */
 let a = 10;
 /**
- * The "let" portion of this just, which is called the declaration, tells the
+ * The "let" portion of this line, which is called the declaration, tells the
  * language interpreter (the browser runtime) that we will be declaring a
  * variable. It's also useful to know, even though we won't use them in this
  * file, that there are alternative declarations to "let" such as "const".

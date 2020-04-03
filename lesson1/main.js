@@ -57,10 +57,9 @@
 let a = 10;
 /**
  * The "let" portion of this just, which is called the declaration, tells the
- * language interpreter (the browser)  that we will be declaring a variable.
- * Most interpreters will still understand if you forget this. It's also useful
- * to know, even though we won't use them in this file, that there are
- * alternative declarations to "let" such as "var" and "const".
+ * language interpreter (the browser runtime) that we will be declaring a
+ * variable. It's also useful to know, even though we won't use them in this
+ * file, that there are alternative declarations to "let" such as "const".
  *
  * After the declaration we specify the variable name. I chose "a" to be my
  * variable name, but we could have chosen anything that doesn't contain spaces

@@ -63,9 +63,9 @@ let a = 10;
  *
  * After the declaration we specify the variable name. I chose "a" to be my
  * variable name, but we could have chosen anything that doesn't contain spaces
- * or symbols, or starts with a number. For example I could also define the
- * following variable:
- * */
+ * or some symbols, or starts with a number. For example I could also define
+ * the following variable:
+ */
 let Much_longer_variable_name1337 = 42;
 /**
  * We set that variable name equal to (=) whatever value we want it to be. This

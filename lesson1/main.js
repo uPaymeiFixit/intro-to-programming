@@ -51,8 +51,8 @@
 // You can start a comment with two slashes (//) too, which is more common
 
 /**
- * Just as in math we might want define a constant variable like a = 10,
- * we do the same when programming like this:
+ * Just as in math we might want define a variable like a = 10, we do the same
+ * when programming like this:
  */
 let a = 10;
 /**

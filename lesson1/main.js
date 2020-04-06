@@ -22,7 +22,7 @@
  * your code. One of the benefits of JavaScript (the language we're using) is
  * that it can be run in the browser without you needing to install anything.
  * I've set up this template so that all you need to do to see your code run is
- * open the demo.html file in your browser, which you can usually do by double
+ * open the index.html file in your browser, which you can usually do by double
  * clicking on it. The HTML (HyperText Markup Language) file often holds the
  * text, images, and overall formatting of a web page. In our case it holds a
  * simple grey "canvas" element, which we will draw on. It's a full web page
@@ -30,9 +30,9 @@
  * have one big element. The file you're in right now is the JavaScript file.
  * JavaScript is often responsible for more dynamic elements of a web page, like
  * submitting a form or interactive animations, which is what we're going to
- * focus on. Since I've set up the demo.html file to automatically link to this
+ * focus on. Since I've set up the index.html file to automatically link to this
  * JavaScript file, all you need to do to see your saved changes in this file is
- * reload the demo.html page in your browser. If you change a color from "green"
+ * reload the index.html page in your browser. If you change a color from "green"
  * to "blue" in this file and save it, once you refresh the page in your browser
  * you should see the change reflected. And I would encourage you to mess with
  * as much as possible. Break it and fix it. Get familiar with the undo button.

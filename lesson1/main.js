@@ -10,7 +10,14 @@
  * this would be a decent way to start learning. I'd love to improve this as
  * much as possible so if you have any feedback or there was anything unclear
  * please let me know. You can email me at josh@gibbs.tk or make an issue on
- * Github. My goal with this template will be to just provide the very basics of
+ * Github. Also if you're just confused about this or you want something
+ * explained that I didn't cover in this guide, please don't hesitate to ask.
+ * This is my passion; it's the equivalent of asking a car guy about his car:
+ * he's not gonna turn you down. Even if you don't know me, the only thing you
+ * should be concerned about regarding asking me a question is how to get me to
+ * shut up. So good luck with the guide, and I'll expect to hear from you soon!
+ * 
+ * My goal with this template will be to just provide the very basics of
  * programming. I'm not going to try to introduce any complex programming
  * paradigms or APIs or anything super language specific. We'll just cover the
  * very basics, and we'll do that by having you read and modify my own code.
@@ -85,9 +92,15 @@ let user_name = "Josh Gibbs";
  */
 
 /**
- * of a function or the value of a variable is while the code is running. Here
- * are a few examples of how you can do this:
  * Now let's learn about logging. Sometimes it's helpful to see what the output
+ * of a function or the value of a variable is while the code is running. We do
+ * this by calling the built-in `console.log()` function. This can be helpful
+ * if you're trying to debug your code, or if you just want to see the output
+ * of a function to make sure you programmed it correctly. The console is
+ * nothing more than a tool for developers and serves no real purpose in a well
+ * written program; you'll likely end up removing all of your console logs after
+ * you finish writing your program. Here are a few examples of how you can log 
+ * information to the console:
  */
 console.log("This is a string.");
 console.log(a);
@@ -96,8 +109,9 @@ console.log("The answer was " + Much_longer_variable_name1337);
 console.log("Hello,", user_name);
 /**
  * You can see the output of all of these by right clicking on the web page in
- * the browser, clicking "Inspect", and then switching to the "Console" tab.
- * You should see the output in that window.
+ * the browser, clicking "Inspect", and then switching to the "Console" tab
+ * towards the bottom of the page. You should see the output in that window. 
+ * We'll be using the console a lot to test our functions and calculations.
  */
 
 /**
@@ -167,13 +181,23 @@ function bmi(name, weight_in_pounds, partial_height_feet, partial_height_inches)
 }
 
 /**
- * Phew, that was a lot. Hopefully it all made sense. The only tricky thing we
- * did that might catch people of guard is we did not return a value. That's
- * okay, it's not required. The returned value of bmi_male will be `void`, but
- * the function will work properly. It does everything we want it to, including
- * logging what the user's BMI is. Lets try running it below:
- */
 bmi(user_name, 175, 5, 11);
+ * Phew, that was a lot. Hopefully it all made sense. Something that may catch
+ * people off guard is the return statement on the last line. In our `f(x)`
+ * function we immediately returned x + x, so saying `let a = f(x)` is
+ * equivalent to `let a = x + x`. However in our bmi function, we
+ * used several lines to calculate our `bmi_value` that we end up returning on
+ * the last line. This tells the function to run all the above code, and then
+ * return `bmi_value` to whatever called it. You don't
+ * always need to return a value in your function, and that's okay! The return
+ * statement is completely optional, so if you see a function without it don't
+ * worry. It just means nothing is depending on that function to return a value.
+ * 
+ * Lets try running our bmi function below with my weight and height: 
+ */
+
+// For fun, try replacing the numbers with your information and refreshing 
+// your browser to see the new number.
 
 /**
  * Moving on with functions, we'll briefly touch on Application Programming
@@ -203,15 +227,16 @@ console.log("Random number between 0 and 1:", Math.random()    ); // ??
 console.log("The width of this window is", window.innerWidth);
 console.log("The height of the window is", window.innerHeight);
 // onclick is to be assigned a function which will be called when we click
+// anywhere on the webpage
 window.onclick = function showAlert() {
   // `alert` will pop up a message
   window.alert("This alert pops up when you click on the page");
 }
+// Go ahead and test it! Click on the page and watch the alert pop up.
 
 /**
  * Hopefully these API functions / variables make sense. Just know that these
- * exist and we can take advantage of them later. For example, we may need to
- * know whe width of the window to know when an enemy goes off the page.
+ * exist and we can and will take advantage of them later.
  */
 
 /**
@@ -248,7 +273,7 @@ if ((user_name === "Josh Gibbs") || false) {
   console.log("Name is still set to Josh Gibbs");
 }
 
-// We can check if something is not equal by putting a ! in front
+// We can check if something is not equal by using !==
 if (10 !== 5) {
   console.log("Correct! 10 does not equal 5!");
 }

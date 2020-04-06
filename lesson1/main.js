@@ -8,7 +8,7 @@
 /**
  * Welcome! I've had a few people ask me how to program lately, and felt like
  * this would be a decent way to start learning. I'd love to improve this as
- * much as possible, so if you have any feedback, or there was anything unclear,
+ * much as possible so if you have any feedback or there was anything unclear
  * please let me know. You can email me at josh@gibbs.tk or make an issue on
  * Github. My goal with this template will be to just provide the very basics of
  * programming. I'm not going to try to introduce any complex programming
@@ -85,9 +85,9 @@ let user_name = "Josh Gibbs";
  */
 
 /**
- * Now lets learn about logging. Sometimes its helpful to see what the output
  * of a function or the value of a variable is while the code is running. Here
  * are a few examples of how you can do this:
+ * Now let's learn about logging. Sometimes it's helpful to see what the output
  */
 console.log("This is a string.");
 console.log(a);
@@ -130,21 +130,21 @@ f(4);
 /**
  * We called it! It assigned the value we passed in, 4, to x and then returned
  * 4 + 4. Fascinating but useless, because we didn't do anything with that
- * data. Lets do it again, but this time lets assign it to a variable and then
+ * data. Let's do it again, but this time let's assign it to a variable and then
  * print the value of that variable:
  */
 let doubled_number = f(4);
 console.log("The output of f(4) =", doubled_number);
 /**
  * We should see 8 printed in the console now. We could have also called f(4)
- * inline with the same result like this:
+ * in line with the same result like this:
  */
 console.log("The output of f(4) =", f(4));
 /**
  * Both of these are functionally the same.
  *
  *
- * Lets look at a much more complicated example, incorporating everything we've
+ * Let's look at a much more complicated example, incorporating everything we've
  * learned so far. I feel like I've over-explained everything so far, so I'm
  * going to possibly under-explain here. This is where feedback would be useful
  * for me if it's confusing.
@@ -156,9 +156,9 @@ function bmi(name, weight_in_pounds, partial_height_feet, partial_height_inches)
   // We need to convert pounds to kg first. 1lb = 0.453592kg
   let weight_in_kg = weight_in_pounds * 0.453592;
 
-  // Now lets combine our height measurements into inches
+  // Now let's combine our height measurements into inches
   let height_in_inches = partial_height_feet * 12 + partial_height_inches;
-  // Convert in to meters. 1in = 0.0254m
+  // Convert into meters. 1in = 0.0254m
   let height_in_meters = height_in_inches * 0.0254;
 
   // We can use our converted data to calculate BMI

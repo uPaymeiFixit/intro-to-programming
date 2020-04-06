@@ -168,7 +168,7 @@ console.log("The output of f(4) =", f(4));
  */
 
 // This function calculates BMI
-function bmi(name, weight_in_pounds, partial_height_feet, partial_height_inches) {
+function bmi(weight_in_pounds, partial_height_feet, partial_height_inches) {
   // The formula for BMI is weight (kg) / height^2 (m^2)
   // We need to convert pounds to kg first. 1lb = 0.453592kg
   let weight_in_kg = weight_in_pounds * 0.453592;
@@ -180,11 +180,9 @@ function bmi(name, weight_in_pounds, partial_height_feet, partial_height_inches)
 
   // We can use our converted data to calculate BMI
   let bmi_value = weight_in_kg / (height_in_meters * height_in_meters);
-  console.log(name + "'s BMI is", bmi_value);
+  return bmi_value;
 }
-
 /**
-bmi(user_name, 175, 5, 11);
  * Phew, that was a lot. Hopefully it all made sense. Something that may catch
  * people off guard is the return statement on the last line. In our `f(x)`
  * function we immediately returned x + x, so saying `let a = f(x)` is
@@ -198,7 +196,12 @@ bmi(user_name, 175, 5, 11);
  * 
  * Lets try running our bmi function below with my weight and height: 
  */
+let josh_bmi = bmi(175, 5, 11);
 
+// You can see above we not only ran the bmi function with my height and weight,
+// but we also assigned the value it returned to a new variable named `josh_bmi`.
+// Let's log that variable below to see what my BMI is in the console. 
+console.log(user_name + "'s BMI is", josh_bmi);
 // For fun, try replacing the numbers with your information and refreshing 
 // your browser to see the new number.
 

@@ -334,7 +334,7 @@ for (let i = 0; i < 10; i = i + 1) {
  * There's a lot going on here, so let's do our best to break it down. A for loop
  * has three parts in its header. The first part can do whatever you like, or
  * nothing at all. In 99% of cases it will be used to define our iterator
- * variable. Most people, including me in this case, named the iterator i.
+ * variable. Most people, including me in this case, named the iterator `i`.
  * Some people will dock points off of your assignments if you use the
  * incredibly common `i` variable name; I'm looking at you, Professor James
  * Hester ;)
@@ -342,7 +342,7 @@ for (let i = 0; i < 10; i = i + 1) {
  * The second part of the for loop header is the conditional statement. This
  * is similar to the body of a for loop in that it takes a true or false
  * (boolean) statement. If the statement evaluates to true, the loop will
- * continue to run. In most cases this will be `i < N` where N is the number of
+ * continue to run. In most cases this will be `i < N` where `N` is the number of
  * times the loop should run. Our loop above runs 10 times, from 0 to 9.
  *
  * The last part of the loop header can also be used for anything you want, but

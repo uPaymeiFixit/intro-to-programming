@@ -206,7 +206,7 @@ bmi(user_name, 175, 5, 11);
  * Moving on with functions, we'll briefly touch on Application Programming
  * Interfaces (APIs). For the most part, APIs are a collection of functions
  * aimed at getting information from or providing information to an application.
- * In our case the application will be the browser. Lets look at some functions
+ * In our case the application will be the browser. Let's look at some functions
  * provided by our browser, which you may think of as the browser's API. The
  * first and probably most useful set of functions belong to the `Math` object.
  */
@@ -221,7 +221,7 @@ console.log("Random number between 0 and 1:", Math.random()    ); // ??
  * For more details on the Math object and the many more functions it contains
  * visit https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math
  *
- * Those are most of the Math functions that will be useful to us, so now lets
+ * Those are most of the Math functions that will be useful to us, so now let's
  * look at a few `window` functions and variables. These usually relate to the
  * actual window that you have open.
  */
@@ -294,7 +294,7 @@ if (false) {
   // going to run
 }
 
-// Lets try a practical example
+// Let's try a practical example
 let my_bmi = 24.4;
 /**
  * For a fun exercise modify the bmi function we wrote earlier so that we can
@@ -331,7 +331,7 @@ for (let i = 0; i < 10; i = i + 1) {
   console.log(i);
 }
 /**
- * There's a lot going on here, so lets do our best to break it down. A for loop
+ * There's a lot going on here, so let's do our best to break it down. A for loop
  * has three parts in its header. The first part can do whatever you like, or
  * nothing at all. In 99% of cases it will be used to define our iterator
  * variable. Most people, including me in this case, named the iterator i.
@@ -348,7 +348,7 @@ for (let i = 0; i < 10; i = i + 1) {
  * The last part of the loop header can also be used for anything you want, but
  * in most cases it's used to increment the iterator. We're adding `1` to `i` every
  * time the loop runs in our case.
- * As a result we're logging numbers 0 through 9 with the above loop.
+ * As a result, we're logging numbers 0 through 9 with the above loop.
  */
 
 /**
@@ -398,7 +398,7 @@ function fibonacci(n) {
   return sequence;
 }
 
-// Lets calculate the first 5 fibonacci numbers:
+// Let's calculate the first 5 fibonacci numbers:
 console.log("Fibonacci:", fibonacci(5));
 
 /**

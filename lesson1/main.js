@@ -34,7 +34,9 @@
  * text, images, and overall formatting of a web page. In our case it holds a
  * simple grey "canvas" element, which we will draw on. It's a full web page
  * just like any other website you would visit, the only difference is we only
- * have one big element. The file you're in right now is the JavaScript file.
+ * have one big element. 
+ *
+ * The file you're in right now is the JavaScript file.
  * JavaScript is often responsible for more dynamic elements of a web page, like
  * submitting a form or interactive animations, which is what we're going to
  * focus on. Since I've set up the index.html file to automatically link to this
@@ -58,7 +60,7 @@
 // You can start a comment with two slashes (//) too, which is more common
 
 /**
- * Just as in math we might want define a variable like a = 10, we do the same
+ * Just as in math we might want to define a variable like "a = 10", we do the same
  * when programming like this:
  */
 let a = 10;
@@ -128,15 +130,16 @@ function f(x) {
  * We declare a function using the `function` keyword. There are other ways to
  * declare a function, and this isn't the same for every language, but it's
  * what we'll focus on for now. After the declaration we name our function. I
- * named it f, but you could have named it anything that follows the same rules
+ * named it `f`, but you could have named it anything that follows the same rules
  * as naming a variable. After that we'll specify the parameters the function
  * accepts. Parameters are just like variables. Here, we chose `x` as the name
- * but we could have named it anything like a variable. Then we surround our
- * code in curly braces { } to tell the interpreter that all of the code in
- * between the curly braces belongs to that function. We also returned a value
- * in this function, we'll go over how this works in more detail later but in
- * short it allows us to get information out of the function, or another way to
- * think about it is assigning the function a dynamic value.
+ * but we could have named it anything like a variable. 
+ *
+ * Then we surround our code in curly braces { } to tell the interpreter that 
+ * all of the code in between the curly braces belongs to that function. We also
+ * returned a value in this function, we'll go over how this works in more detail 
+ * later, but in short, it allows us to get information out of the function, or 
+ * another way to think about it is assigning the function a dynamic value.
  *
  * We can call this function like this:
  */
@@ -335,13 +338,15 @@ for (let i = 0; i < 10; i = i + 1) {
  * Some people will dock points off of your assignments if you use the
  * incredibly common `i` variable name; I'm looking at you, Professor James
  * Hester ;)
+ *
  * The second part of the for loop header is the conditional statement. This
  * is similar to the body of a for loop in that it takes a true or false
  * (boolean) statement. If the statement evaluates to true, the loop will
  * continue to run. In most cases this will be `i < N` where N is the number of
  * times the loop should run. Our loop above runs 10 times, from 0 to 9.
+ *
  * The last part of the loop header can also be used for anything you want, but
- * in most cases it's used to increment the iterator. We're adding 1 to i every
+ * in most cases it's used to increment the iterator. We're adding `1` to `i` every
  * time the loop runs in our case.
  * As a result we're logging numbers 0 through 9 with the above loop.
  */
@@ -366,13 +371,13 @@ a--; // Decrements `a` by 1. Equivalent to `a = a - 1`;
  * We could use a for loop to calculate the first `n` fibonacci numbers like so:
  */
 
-// Calculates first n fibonacci numbers
+// Calculates first `n` fibonacci numbers
 function fibonacci(n) {
   // Define first two fibonacci numbers manually, 0 and 1
   let n1 = 0;
   let n2 = 1;
   // We'll also keep a record of these numbers in a string
-  let sequence = n1 + ", " + n2; // Right now this is equivalent to `0, 1`
+  let sequence = n1 + ", " + n2; // Right now this is equivalent to "0, 1"
   // Now we'll define our loop, which will simply run the code `n` times. Note
   // we never even end up using the `i` variable other than in the header.
   for (let i = 0; i < n; i++) {

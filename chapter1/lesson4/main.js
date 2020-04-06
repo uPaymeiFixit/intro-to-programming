@@ -140,7 +140,7 @@ function fibonacci3(n) {
  * an object like so:
  */
 let player = {
-  name: user_name,
+  name: 'Josh',
   age: 25,
   x_position: Math.random() * 1000,
   y_position: Math.random() * window.innerHeight,

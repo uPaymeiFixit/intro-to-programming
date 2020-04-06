@@ -31,6 +31,14 @@ if (5 === 5) {
   // true
 }
 
+// Real quick, lets create some variables and a function to use in our if 
+// statements. We've created all of these in previous lessons:
+let a = 10;
+let user_name = "Josh Gibbs";
+function f(x) {
+  return 2 * x;
+}
+
 // We can check multiple statements by using &&
 if ((a === 10) && (f(a) >= 20)) {
   console.log("You probably haven't modified any code.");

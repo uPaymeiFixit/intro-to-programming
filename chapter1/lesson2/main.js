@@ -91,7 +91,7 @@ let josh_bmi = bmi(175, 5, 11);
 // You can see above we not only ran the bmi function with my height and weight,
 // but we also assigned the value it returned to a new variable named `josh_bmi`.
 // Let's log that variable below to see what my BMI is in the console. 
-console.log(user_name + "'s BMI is", josh_bmi);
+console.log("Josh's BMI is", josh_bmi);
 // For fun, try replacing the numbers with your information and refreshing 
 // your browser to see the new number.
 

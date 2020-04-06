@@ -299,7 +299,7 @@ let my_bmi = 24.4;
 /**
  * For a fun exercise modify the bmi function we wrote earlier so that we can
  * write the line above like this:
- * let mi_bmi = bmi(user_name, 175, 5, 11);
+ * let my_bmi = bmi(user_name, 175, 5, 11);
  * HINT: we'll need to add a return statement to the end of the bmi function
  */
 if (my_bmi < 18.5) {

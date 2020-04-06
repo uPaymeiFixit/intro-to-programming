@@ -393,7 +393,21 @@ function fibonacci(n) {
     n2 = n3;
     // We're going to add our new n2 (which is equal to n3) to the string
     // On the first iteration it will look like this "0, 1, 1"
-    sequence += ", " + n2;
+    sequence += ", " + n3;
+    // I've got some feedback that the statement above has caused some
+    // confusion, so we'll break it down. The first thing to remember is that
+    // the `+=` operator takes whatever value is to the right of it, and adds it
+    // to the variable on the left. Lets break down how this operation will work
+    // on the first iteration of the for loop. If we look under the hood,
+    // `sequence` is equal to the string "0, 1" the first time this runs, and
+    // `n3` is equal to the number 1. So our raw values look like this:
+    //     "0, 1" += ", " + n3
+    // Now if we simplify the right hand side (", " + n3), we get ", 1" which
+    // we'll show below:
+    //     "0, 1" += ", 1"
+    // So now if we add "0, 1" and ", 1" we end up with:
+    //     "0, 1, 1"
+    // On the next iteration when `n3` = 2, the end result will be "0, 1, 1, 2"
   }
 
   // We'll return the sequence string so we can see all of the first n numbers

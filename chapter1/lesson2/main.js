@@ -84,7 +84,7 @@ function bmi(weight_in_pounds, partial_height_feet, partial_height_inches) {
  * statement is completely optional, so if you see a function without it don't
  * worry. It just means nothing is depending on that function to return a value.
  * 
- * Lets try running our bmi function below with my weight and height: 
+ * Let's try running our bmi function below with my weight and height: 
  */
 let josh_bmi = bmi(175, 5, 11);
 

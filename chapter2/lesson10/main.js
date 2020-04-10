@@ -5,8 +5,9 @@
  * Welcome to lesson 10! To finish chapter 2, this is going to be somewhat of a
  * bonus lesson. I'd encourage you to use this as your playground from here on
  * out. I'm going to write a long, somewhat complicated game and your job is to
- * read through and add your own comments explaining how each function works.
- * If you need any help, please let me know. 
+ * read through and understand as much as possible. I'll have comments, but
+ * they'll be far less detailed than in previous lessons. If you need any help,
+ * please let me know. 
  * 
  * I won't add an outro to this file so I'll say right now, if this has helped
  * you in any way or you have any feedback you feel would make this more useful,
@@ -17,15 +18,20 @@
  * you can't figure something out. 
  */
 
-const _PERCENT_GAIN_ON_WIN = 0.2;
-const _CIRCLES = 200;
-const _MIN_SIZE = 5;
-const _MAX_SIZE = 15;
-const _COLLISIONS = false;
-const _DEBUG = false;
-const _ADD_CIRCLE_WHEN_EATEN = true;
-const _PLAYER = false;
+// Sometimes we add constants to the top. This will be one of the only new
+// concepts you'll run across in this file. A constant variable is just one that
+// cannot be changed later on. You can think of it as settings for the game. Go
+// ahead and change them and see how the game changes. 
+const _PERCENT_GAIN_ON_WIN = 0.2; // Percent of radius player gains by eating another
+const _CIRCLES = 200; // Number of initial circles
+const _MIN_SIZE = 5; // Minimum initial size
+const _MAX_SIZE = 15; // Maximum initial size
+const _COLLISIONS = false; // Detect collisions (and eating) between objects
+const _DEBUG = false; // Draw vectors and indices
+const _ADD_CIRCLE_WHEN_EATEN = true; // Keep creating new objects when ones get eaten
+const _PLAYER = false; // Enable the user-controllable player
 
+// Generates random number between min and max
 function random(min, max) {
   let size = max - min;
   let number = Math.random() * size; 
@@ -85,6 +91,7 @@ function drawRectangle(x, y, width, height, color) {
   ctx.fillRect(x, y, width, height);
 }
 
+// Draw circle on ctx
 function drawCircle(x, y, radius, color) {
   ctx.fillStyle = color;
   ctx.beginPath();
@@ -92,7 +99,19 @@ function drawCircle(x, y, radius, color) {
   ctx.fill();
 }
 
+// Draw line on ctx
+function drawLine(x1, y1, x2, y2, color, line_width) {
+  ctx.strokeStyle = color;
+  ctx.lineWidth = line_width;
+  ctx.beginPath();
+  ctx.moveTo(x1, y1);
+  ctx.lineTo(x2, y2);
+  ctx.stroke();
+}
+
 // Returns the unit vector that points from object1 to object2
+// A unit vector is a vector whose magnitude is 1, for more info visit
+// https://mathworld.wolfram.com/UnitVector.html
 function calculateUnitVector(from_object, to_object) {
   let theta = Math.atan2(to_object.y - from_object.y, to_object.x - from_object.x);
   return [Math.cos(theta), Math.sin(theta)];
@@ -107,15 +126,21 @@ function normalizeVector(x, y) {
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////// END UTILITIES ///////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
+
+// Global variables
 let player;
 let circle_array;
+
+// Initial setup
 function setup() {
+  // Fill our circle_array with circles
   circle_array = [];
   for (let i = 0; i < _CIRCLES; i++) {
     circle_array.push(makeCircle());
   }
 
   if (_PLAYER) {
+    // Make first circle user-controllable
     player = circle_array[0];
     player.ai = false;
     player.x = window.innerWidth / 2;
@@ -126,14 +151,18 @@ function setup() {
 }
 
 // Return speed as a function of radius
+// Graphs: https://www.desmos.com/calculator/deee403wzi
 function calculateSpeed(radius) {
   return 1 + 10 / (radius + 4);
 }
 
 // Generate coordinates as far as `offset` pixels off screen
 function generateOffScreenCoordinates(offset) {
+  // Declare variables outside of if-scope
   let x;
   let y;
+  // Generate random integer, 1, 2, 3, 4 which will correspond to the side
+  // of the screen we're going to generate our (x, y) on
   let side = Math.floor(random(0, 4));
   if (side === 0) {
     // Top
@@ -152,6 +181,7 @@ function generateOffScreenCoordinates(offset) {
     x = random(window.innerWidth, window.innerWidth + offset);
     y = random(0, window.innerHeight);
   }
+  // Return a 2-item array of our x and y coordinates
   return [x, y];
 }
 
@@ -164,53 +194,86 @@ function makeCircle() {
     y: position[1],
     radius: radius,
     speed: calculateSpeed(radius),
+    // By default circles will be ai, not human
     ai: true,
+    // We'll use these later
     vectors: [],
     vx: 0,
     vy: 0
   }
 }
 
+// Main loop
 function loop() {
+  // Clear the screen each frame
   ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
   
   if (_COLLISIONS) {
+    // Check if circles have bumped into each other and eat them if they have
     checkCollisions();
   }
   
+  // Assign each circle a target to chase
   findTarget();
+  // Assign each circle a list of enemies to run from
   listEnemies();
 
   // Here's how this is going to work, we're going to have an array of vectors
-  // and the weights assigned to those vectors. Most of the vectors are going to
-  // be to run away from enemies, with weights that get exponentially larger as
-  // the enemy gets closer to us. We're also going to have a vector that points
-  // us toward our target with a constant weight, and one that pushes us toward
-  // the center with its weight growing as we get further from the center.
+  // and weights assigned to those vectors. Most of the vectors are going to be 
+  // to run away from enemies, with weights that get exponentially larger as the
+  // enemy gets closer to us. We're also going to have a vector that points us 
+  // toward our target with a constant weight, and one that pushes us toward the
+  // center with its weight growing as we get further from the center.
+
+  // First we'll set all the vectors to empty
   resetVectors();
+  // Now we'll add the vectors that point toward our target
   addGreedVector();
+  // Now we add vectors that points us away from the walls
   addWallsVector();
+  // Now we add vectors that point us away from enemies
   addFearVectors();
+  // Finally calculate our vx and vy (with which we'll move) from all of the 
+  // vectors we just added
   calculateVectorsSum();
 
+  // Change circles' (x, y) by (vx, vy)
   moveCircles();
   
   if (_PLAYER) {
+    // Draw score in the top left
     drawScore();
   }
+  // Draw each circle
   drawCircles();
+
   if (_DEBUG) {
+    // If we don't like the way the AI works, it might be helpful to see where
+    // each vector is pointing, so we draw each circle's vectors
     drawVectors();
+    // Also draw the circle's index in the array so its easier to identify and
+    // access from the console
     drawNames();
   }
 }
 
 // Draw vectors overtop of circles
 function drawVectors() {
+  // Loop through each circle
+  // This is a different type of for loop, you really don't need to understand
+  // how it works right now as this is the only place I'll be using it, but in
+  // case you're curious, it's the shorthand to loop through an array. Instead
+  // of accessing each element by writing something like `circle_array[i]' it
+  // simply names the currently accessed element `circle` (or whatever name
+  // you've chosen). So you can't access an array's indices (i, j, etc) but the
+  // code is much cleaner
   for (let circle of circle_array) {
+    // Loop through each circle's vectors
     for (let vector of circle.vectors) {
       let color;
       let line_width;
+      // Assign different colors to different types of vectors
+      // Assign different line weights too in case they overlap
       if (vector.name === "greed") {
         color = "#00FF00";
         line_width = 0.5;
@@ -232,39 +295,41 @@ function drawNames() {
   for (let i = 0; i < circle_array.length; i++) {
     ctx.font = "12px Arial"
     ctx.fillStyle = "white";
-    ctx.fillText(i.toString(), circle_array[i].x - 3, circle_array[i].y + 3);
+    ctx.fillText(i, circle_array[i].x - 3, circle_array[i].y + 3);
   }
-}
-
-function drawLine(x1, y1, x2, y2, color, line_width) {
-  ctx.strokeStyle = color;
-  ctx.lineWidth = line_width;
-  ctx.beginPath();
-  ctx.moveTo(x1, y1);
-  ctx.lineTo(x2, y2);
-  ctx.stroke();
 }
 
 // Check collisions between each object
 function checkCollisions() {
   // Loop through circle_array
   for (let i = 0; i < circle_array.length; i++) {
-    // Check for collision between other circles
-    // We can start at j = i + 1 because we've already checked combinations 
-    // before that
-    for (let j = i + 1; j < circle_array.length; j++) {
-      let distance = calculateDistance(circle_array[i], circle_array[j]);
-      let min_distance = circle_array[i].radius + circle_array[j].radius;
-      if (distance <= min_distance) {
-        // if i's radius is bigger than j's, i eats j
-        if (circle_array[i].radius > circle_array[j].radius) {
-          eat(i, j);
-        } else {
-          eat(j, i);
+    // Only bother checking this if the circles are on the screen
+    if (circleIsOnScreen(circle_array[i])) {
+      // Check for collision between other circles
+      // We can start at j = i + 1 because we've already checked combinations 
+      // before that
+      for (let j = i + 1; j < circle_array.length; j++) {
+        let distance = calculateDistance(circle_array[i], circle_array[j]);
+        let min_distance = circle_array[i].radius + circle_array[j].radius;
+        if (distance <= min_distance) {
+          // if i's radius is bigger than j's, i eats j
+          if (circle_array[i].radius > circle_array[j].radius) {
+            eat(i, j);
+          } else {
+            eat(j, i);
+          }
         }
       }
     }
   }
+}
+
+// Calculate whether or not the circle's x and y positions exist on the screen
+function circleIsOnScreen(circle) {
+  return circle.x > 0 && 
+         circle.x < window.innerWidth &&
+         circle.y > 0 &&
+         circle.y < window.innerHeight;
 }
 
 // Perform actions for winner eating loser, where winner and loser are indices
@@ -278,10 +343,15 @@ function eat(winner, loser) {
   } else {
     // Grow i's radius
     circle_array[winner].radius += circle_array[loser].radius * _PERCENT_GAIN_ON_WIN;
+    // If a circle is pretty much as big as the screen, they won
     if (circle_array[winner].radius > window.innerHeight / 2) {
+      // Score is calculated such that the initial score is 0, and then it grows
+      // based on the radius
       let score = Math.round((player.radius - (_MIN_SIZE + _MAX_SIZE) / 2) * 100);
-      window.alert("Somebody else won! Your score: " + score)
+      window.alert("Maximum size reached! Your score: " + score)
+      // Re-setup the game to start over
       setup();
+      // Get out of this function, we don't need to be here anymore
       return;
     }
     // Recalculate i's speed
@@ -322,14 +392,6 @@ function findTarget() {
     }
     circle_array[i].target = closest_target;
   }
-}
-
-// Calculate whether or not the circle's x and y positions exist on the screen
-function circleIsOnScreen(circle) {
-  return circle.x > 0 && 
-         circle.x < window.innerWidth &&
-         circle.y > 0 &&
-         circle.y < window.innerHeight;
 }
 
 // Compile a list of enemies for each circle
@@ -390,6 +452,7 @@ function addFearVectors() {
       // This sigmoid function starts at 1 and decreases until distance is
       // is around 110 pixels. So when they're really close, our weight will be
       // almost 1
+      // Graph: https://www.desmos.com/calculator/deee403wzi
       let weight = 1 / (1 + Math.pow(1.08, d - 60));
       // Find unit vector that points us toward the enemy (we'll reverse it in
       // a minute)
@@ -412,8 +475,8 @@ function addWallsVector() {
     // This on is going to be a little different. We're going to come up with a
     // vx and vy that depend on our proximity to a wall. That vx and vy will
     // be the constant. To see the equation used in all of our functions, be
-    // sure to look at the desmos graphs: 
-    // https://www.desmos.com/calculator/884ryki1en
+    // sure to look at the Desmos graphs: 
+    // https://www.desmos.com/calculator/deee403wzi
 
     // Through the magic of algebra, this formula gives us the percentage of our
     // circle's x position from the center to the wall. For example, if the 

@@ -18,11 +18,13 @@
  */
 
 const _PERCENT_GAIN_ON_WIN = 0.2;
-const _CIRCLES = 100;
+const _CIRCLES = 200;
 const _MIN_SIZE = 5;
 const _MAX_SIZE = 15;
-const _START_OFF_SCREEN = true;
 const _COLLISIONS = false;
+const _DEBUG = false;
+const _ADD_CIRCLE_WHEN_EATEN = true;
+const _PLAYER = false;
 
 function random(min, max) {
   let size = max - min;
@@ -97,7 +99,7 @@ function calculateUnitVector(from_object, to_object) {
 }
 
 // Returns a normalized unit vector from <x, y>
-function toUnitVector(x, y) {
+function normalizeVector(x, y) {
   let magnitude = Math.sqrt(x * x + y * y);
   return [x / magnitude, y / magnitude];
 }
@@ -106,57 +108,66 @@ function toUnitVector(x, y) {
 ////////////////////////////// END UTILITIES ///////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
 let player;
-let circle_array = [];
+let circle_array;
 function setup() {
+  circle_array = [];
   for (let i = 0; i < _CIRCLES; i++) {
     circle_array.push(makeCircle());
   }
-  player = circle_array[0];
-  player.ai = false;
-  player.x = window.innerWidth / 2;
-  player.y = window.innerHeight / 2;
-  player.radius = 20;
-  player.color = "white";
+
+  if (_PLAYER) {
+    player = circle_array[0];
+    player.ai = false;
+    player.x = window.innerWidth / 2;
+    player.y = window.innerHeight / 2;
+    player.radius = (_MIN_SIZE + _MAX_SIZE) / 2; // Player's radius will be average of min and max 
+    player.color = "white";
+  }
 }
 
 // Return speed as a function of radius
 function calculateSpeed(radius) {
-  return 0.8 + 10 / (radius + 4);
+  return 1 + 10 / (radius + 4);
+}
+
+// Generate coordinates as far as `offset` pixels off screen
+function generateOffScreenCoordinates(offset) {
+  let x;
+  let y;
+  let side = Math.floor(random(0, 4));
+  if (side === 0) {
+    // Top
+    x = random(0, window.innerWidth);
+    y = random(-offset, 0);
+  } else if (side === 1) {
+    // Bottom
+    x = random(0, window.innerWidth);
+    y = random(window.innerHeight, window.innerHeight + offset);
+  } else if (side === 2) {
+    // Left
+    x = random(-offset, 0);
+    y = random(0, window.innerHeight);
+  } else {
+    // Right
+    x = random(window.innerWidth, window.innerWidth + offset);
+    y = random(0, window.innerHeight);
+  }
+  return [x, y];
 }
 
 // Generate a circle object
 function makeCircle() {
-  let x = random(0, window.innerWidth);
-  let y = random(0, window.innerHeight);
-
-  if (_START_OFF_SCREEN) {
-    let side = Math.floor(random(0, 4));
-    if (side === 0) {
-      // Top
-      x = random(0, window.innerWidth);
-      y = random(-500, 0);
-    } else if (side === 1) {
-      // Bottom
-      x = random(0, window.innerWidth);
-      y = random(window.innerHeight, window.innerHeight + 500);
-    } else if (side === 2) {
-      // Left
-      x = random(-500, 0);
-      y = random(0, window.innerHeight);
-    } else {
-      // Right
-      x = random(window.innerWidth, window.innerWidth + 500);
-      y = random(0, window.innerHeight);
-    }
-  }
+  let position = generateOffScreenCoordinates(500);
   let radius = random(_MIN_SIZE, _MAX_SIZE);
   return {
-    x: x,
-    y: y,
+    x: position[0],
+    y: position[1],
     radius: radius,
     speed: calculateSpeed(radius),
     ai: true,
-    name: (new Date()).getMilliseconds(),
+    vectors: [],
+    vx: 0,
+    vy: 0
   }
 }
 
@@ -169,14 +180,69 @@ function loop() {
   
   findTarget();
   listEnemies();
-  calculateGreedVector();
-  calculateFearVector();
-  calculateCenterVector();
-  calculateWeightedMovementVector();
+
+  // Here's how this is going to work, we're going to have an array of vectors
+  // and the weights assigned to those vectors. Most of the vectors are going to
+  // be to run away from enemies, with weights that get exponentially larger as
+  // the enemy gets closer to us. We're also going to have a vector that points
+  // us toward our target with a constant weight, and one that pushes us toward
+  // the center with its weight growing as we get further from the center.
+  resetVectors();
+  addGreedVector();
+  addWallsVector();
+  addFearVectors();
+  calculateVectorsSum();
+
   moveCircles();
   
-  drawScore();
+  if (_PLAYER) {
+    drawScore();
+  }
   drawCircles();
+  if (_DEBUG) {
+    drawVectors();
+    drawNames();
+  }
+}
+
+// Draw vectors overtop of circles
+function drawVectors() {
+  for (let circle of circle_array) {
+    for (let vector of circle.vectors) {
+      let color;
+      let line_width;
+      if (vector.name === "greed") {
+        color = "#00FF00";
+        line_width = 0.5;
+      } else if (vector.name === "center") {
+        color = "#0040FF";
+        line_width = 0.8;
+      } else if (vector.name === "fear") {
+        color = "#FF0000";
+        line_width = 1.1;
+      }
+      let scale = 100;
+      drawLine(circle.x, circle.y, circle.x + vector.vx * vector.weight * scale, circle.y + vector.vy * vector.weight * scale, color, line_width);
+    }
+  }
+}
+
+// Draw names over characters
+function drawNames() {
+  for (let i = 0; i < circle_array.length; i++) {
+    ctx.font = "12px Arial"
+    ctx.fillStyle = "white";
+    ctx.fillText(i.toString(), circle_array[i].x - 3, circle_array[i].y + 3);
+  }
+}
+
+function drawLine(x1, y1, x2, y2, color, line_width) {
+  ctx.strokeStyle = color;
+  ctx.lineWidth = line_width;
+  ctx.beginPath();
+  ctx.moveTo(x1, y1);
+  ctx.lineTo(x2, y2);
+  ctx.stroke();
 }
 
 // Check collisions between each object
@@ -187,24 +253,44 @@ function checkCollisions() {
     // We can start at j = i + 1 because we've already checked combinations 
     // before that
     for (let j = i + 1; j < circle_array.length; j++) {
-      let distance = calculateDistance(circle_array[i], circle_array[j], true);
-      // Since we're using fast-distance above, which returns d², we need to
-      // also square the min_distance below:
-      let min_distance = Math.pow(circle_array[i].radius + circle_array[j].radius, 2);
+      let distance = calculateDistance(circle_array[i], circle_array[j]);
+      let min_distance = circle_array[i].radius + circle_array[j].radius;
       if (distance <= min_distance) {
+        // if i's radius is bigger than j's, i eats j
         if (circle_array[i].radius > circle_array[j].radius) {
-          circle_array[i].radius += circle_array[j].radius * _PERCENT_GAIN_ON_WIN;
-          circle_array[i].speed = calculateSpeed(circle_array[i].radius);
-          // circle_array[j] = makeObstacle();
-          circle_array.splice(j, 1);
+          eat(i, j);
         } else {
-          circle_array[j].radius += circle_array[i].radius * _PERCENT_GAIN_ON_WIN;
-          circle_array[j].speed = calculateSpeed(circle_array[j].radius);
-          // circle_array[i] = makeObstacle();
-          circle_array.splice(i, 1);
+          eat(j, i);
         }
-        
       }
+    }
+  }
+}
+
+// Perform actions for winner eating loser, where winner and loser are indices
+// of `circle_array` because we need to be able to remove them from the array
+function eat(winner, loser) {
+  // If the loser is the player, restart the game
+  if (!circle_array[loser].ai) {
+    let score = Math.round((player.radius - (_MIN_SIZE + _MAX_SIZE) / 2) * 100);
+    window.alert("You lost! Score: " + score);
+    setup();
+  } else {
+    // Grow i's radius
+    circle_array[winner].radius += circle_array[loser].radius * _PERCENT_GAIN_ON_WIN;
+    if (circle_array[winner].radius > window.innerHeight / 2) {
+      let score = Math.round((player.radius - (_MIN_SIZE + _MAX_SIZE) / 2) * 100);
+      window.alert("Somebody else won! Your score: " + score)
+      setup();
+      return;
+    }
+    // Recalculate i's speed
+    circle_array[winner].speed = calculateSpeed(circle_array[winner].radius);
+    // Remove j from the array
+    if (_ADD_CIRCLE_WHEN_EATEN) {
+      circle_array[loser] = makeCircle();
+    } else {
+      circle_array.splice(loser, 1);
     }
   }
 }
@@ -263,106 +349,117 @@ function listEnemies() {
   }
 }
 
-// Calculate greed vector (push towards target)
-function calculateGreedVector() {
+// Reset vectors for all circles
+function resetVectors() {
+  for (let i = 0; i < circle_array.length; i++) {
+    circle_array[i].vectors = [];
+  }
+}
+
+// Add weighted vectors that point us toward our target
+function addGreedVector() {
   // Loop through circles array
   for (let i = 0; i < circle_array.length; i++) {
-    // Make sure we have at least a defined vector
-    circle_array[i].vx_greed = 0;
-    circle_array[i].vy_greed = 0;
-    // Make sure we actually have a target
+    // Make sure we actually have a target to chase
     if (circle_array[i].target !== undefined) {
       // Calculate the unit vector that moves us toward the target
-      let v_vector = calculateUnitVector(circle_array[i], circle_array[i].target);
-      circle_array[i].vx_greed = v_vector[0];
-      circle_array[i].vy_greed = v_vector[1];
+      let vector = calculateUnitVector(circle_array[i], circle_array[i].target);
+      // Unlike our other vectors, we're going to weight this one a constant 0.5
+      let weight = 0.5;
+      // Add our new weighted vector to the circle's list of vectors
+      circle_array[i].vectors.push({
+        name: "greed", // Add a name just in case we need to debug later
+        weight: weight,
+        vx: vector[0],
+        vy: vector[1]
+      });
     }
   }
 }
 
-// Calculate fear vector (push away from enemies, weighted)
-function calculateFearVector() {
+// Add weighted vectors that point us away from enemies
+function addFearVectors() {
+  // Loop through each circle
   for (let i = 0; i < circle_array.length; i++) {
-    // Make sure we have at least a defined vector
-    circle_array[i].vx_fear = 0;
-    circle_array[i].vy_fear = 0;
-    // Make sure we actually have enemies
-    if (circle_array[i].enemies.length !== 0) {
-      let sx = 0; // Sum of x-vector components
-      let sy = 0; // Sum of y-vector components
-      // Loop through all of our enemies
-      for (let j = 0; j < circle_array[i].enemies.length; j++) {
-        // Rename this for easier use
-        let enemy = circle_array[i].enemies[j];
-        // Get distance between us and the enemy
-        let distance = calculateDistance(circle_array[i], enemy);
-        // Calculate how heavily we'll weigh our fear of this enemy
-        let weight = 1 / distance; // It gets exponentially more severe as it gets closer to us
-        // Find the unit vector showing us the direction to move away from enemy
-        let v_vector = calculateUnitVector(circle_array[i], enemy);
-        sx += -v_vector[0] * weight; // multiply vector by severity scalar and
-        sy += -v_vector[1] * weight; // add it to our sum of vector components
-      }
-      let unit_vector = toUnitVector(sx, sy); // Convert <sx, sy> to unit vector
-      circle_array[i].vx_fear = unit_vector[0];
-      circle_array[i].vy_fear = unit_vector[1];
+    // Loop through each enemy of circle `i`
+    for (let j = 0; j < circle_array[i].enemies.length; j++) {
+      // Rename enemy for easier use
+      let enemy = circle_array[i].enemies[j];
+      // Calculate distance between circle and enemy
+      let d = calculateDistance(circle_array[i], enemy) - (circle_array[i].radius + enemy.radius);
+      // This sigmoid function starts at 1 and decreases until distance is
+      // is around 110 pixels. So when they're really close, our weight will be
+      // almost 1
+      let weight = 1 / (1 + Math.pow(1.08, d - 60));
+      // Find unit vector that points us toward the enemy (we'll reverse it in
+      // a minute)
+      let vector = calculateUnitVector(circle_array[i], enemy);
+      // Add our new weighted vector to the circle's list of vectors
+      circle_array[i].vectors.push({
+        name: "fear",
+        weight: weight,
+        vx: -vector[0], // note that we're reversing the magnitude to run away
+        vy: -vector[1] // // note that we're reversing the magnitude to run away
+      });
     }
   }
 }
 
-// Calculate center vector (push toward center)
-function calculateCenterVector() {
-  for (let i = 0; i < circle_array.length; i++) {
-    // Make an object with x and y of center of screen because our
-    // calculateUnitVector expects an object with x and y properties as parameters
-    let center_point = {
-      x: window.innerWidth / 2,
-      y: window.innerHeight / 2
-    }
-    let v_vector = calculateUnitVector(circle_array[i], center_point);
-    circle_array[i].vx_center = v_vector[0];
-    circle_array[i].vy_center = v_vector[1];
-  }
-}
-
-// After we've calculated our different vector components we're going to weigh
-// and average them 
-function calculateWeightedMovementVector() {
+// Add vector to push us away from walls
+function addWallsVector() {
   // Loop through circles array
   for (let i = 0; i < circle_array.length; i++) {
-    // At first I had a static weight for the center vector, but it's important
-    // to keep the circles from being pressed up against the walls by the other
-    // vectors, so we're going to make the weight go up as we get closer to the
-    // edge of a wall. 
-    
-    // Make an object with x and y of center of screen because our
-    // calculateUnitVector expects an object with x and y properties as parameters
-    let center_point = {
-      x: window.innerWidth / 2,
-      y: window.innerHeight / 2
-    }
-    let distance = calculateDistance(circle_array[i], center_point);
-    // if the ball is halfway between the wall and the center,
-    // `distance_percent` will be 0.5
-    let distance_percent_x = distance / (window.innerWidth / 2);
-    let distance_percent_y = distance / (window.innerHeight / 2);
-    // We're going to make the weight a function of the percentage
-    let center_weight_x = Math.pow(distance_percent_x, 10);
-    let center_weight_y = Math.pow(distance_percent_y, 10);
-    // We're done calculating our dynamic weight for the center vector
-    
-    // Assign static weights
-    let greed_weight = 0.5;
-    let fear_weight = 0.5;
-    // let center_weight = 0.3 // 10% weight on center 
+    // This on is going to be a little different. We're going to come up with a
+    // vx and vy that depend on our proximity to a wall. That vx and vy will
+    // be the constant. To see the equation used in all of our functions, be
+    // sure to look at the desmos graphs: 
+    // https://www.desmos.com/calculator/884ryki1en
 
-    // Weigh vectors and add them up
-    let vx = circle_array[i].vx_greed * greed_weight + circle_array[i].vx_fear * fear_weight + circle_array[i].vx_center * center_weight_x;
-    let vy = circle_array[i].vy_greed * greed_weight + circle_array[i].vy_fear * fear_weight + circle_array[i].vy_center * center_weight_y;
-    // Now transform those huge added-up vectors into a unit-vector
-    let unit_vector2 = toUnitVector(vx, vy);
-    circle_array[i].vx = unit_vector2[0];
-    circle_array[i].vy = unit_vector2[1];
+    // Through the magic of algebra, this formula gives us the percentage of our
+    // circle's x position from the center to the wall. For example, if the 
+    // screen is 200 pixels wide and the circle's x position is 25, it would
+    // come out to |1-2x/w| = |1-2*25/200| = 75% of the way from the center to
+    // the wall
+    let percent_to_wall_x = 1 - 2 * circle_array[i].x / window.innerWidth;
+    let percent_to_wall_y = 1 - 2 * circle_array[i].y / window.innerHeight;
+    // Calculate vx and vy based on our equation
+    let vx = Math.pow(percent_to_wall_x / 1.05, 3);
+    let vy = Math.pow(percent_to_wall_y / 1.05, 3);
+    // Normalize the vector
+    let vector = normalizeVector(vx, vy);
+    // Our weight should be whichever is higher, vx or vy, but cap it at 1.2
+    let weight = Math.min(Math.max(Math.abs(vx), Math.abs(vy)), 1.2);
+    // Add vector to the list
+    circle_array[i].vectors.push({
+      name: "center",
+      weight: weight,
+      vx: vector[0],
+      vy: vector[1]
+    });
+  }
+}
+
+// Calculate final vx and vy for each circle
+function calculateVectorsSum() {
+  // Loop through circle array
+  for (let i = 0; i < circle_array.length; i++) {
+    // Only calculate vx and vy if this is an ai, user fends for themselves
+    if (circle_array[i].ai) {
+      let sx = 0; // Sum of weighted vx's
+      let sy = 0; // Sum of weighted vy's
+      // Loop through each vector on our circle
+      for (let j = 0; j < circle_array[i].vectors.length; j++) {
+        // Rename for easier use
+        let vector = circle_array[i].vectors[j];
+        // Sum our weighted vectors up
+        sx += vector.vx * vector.weight;
+        sy += vector.vy * vector.weight;
+      }
+      // Convert it to a unit vector
+      let unit_vector = normalizeVector(sx, sy);
+      circle_array[i].vx = unit_vector[0]; // Add to our official vx
+      circle_array[i].vy = unit_vector[1]; // Add to our official vy
+    }
   }
 }
 
@@ -370,11 +467,8 @@ function calculateWeightedMovementVector() {
 function moveCircles() {
   // Loop through circles
   for (let i = 0; i < circle_array.length; i++) {
-    // Only move if it's an AI
-    if (circle_array[i].ai) {
-      circle_array[i].x += circle_array[i].vx * circle_array[i].speed;
-      circle_array[i].y += circle_array[i].vy * circle_array[i].speed;
-    }
+    circle_array[i].x += circle_array[i].vx * circle_array[i].speed;
+    circle_array[i].y += circle_array[i].vy * circle_array[i].speed;
   }
 }
 
@@ -382,7 +476,7 @@ function moveCircles() {
 function drawScore() {
   ctx.font = "50px Arial"
   ctx.fillStyle = "gray";
-  let score = Math.round(player.radius * 100) - 1000;
+  let score = Math.round((player.radius - (_MIN_SIZE + _MAX_SIZE) / 2) * 100);
   ctx.fillText('Score: ' + score, 40, 75);
 }
 
@@ -396,10 +490,6 @@ function drawCircles() {
     }
     // Actually draw the circle
     drawCircle(circle_array[i].x, circle_array[i].y, circle_array[i].radius, circle_array[i].color);
-
-    ctx.font = "12px Arial"
-    ctx.fillStyle = "white";
-    ctx.fillText(i.toString(), circle_array[i].x - 3, circle_array[i].y + 3);
   }
 }
 
@@ -416,25 +506,29 @@ function calculateColor(circle) {
 }
 
 window.onkeydown = function checkKeyDown(event) {
-  if (event.key === "ArrowUp" || event.key === "w") {
-    player.vy = -player.speed;
-  } else if (event.key === "ArrowDown" || event.key === "s") {
-    player.vy = player.speed;
-  } else if (event.key === "ArrowLeft" || event.key === "a") {
-    player.vx = -player.speed;
-  } else if (event.key === "ArrowRight" || event.key === "d") {
-    player.vx = player.speed;
+  if (_PLAYER) {
+    if (event.key === "ArrowUp" || event.key === "w") {
+      player.vy = -player.speed;
+    } else if (event.key === "ArrowDown" || event.key === "s") {
+      player.vy = player.speed;
+    } else if (event.key === "ArrowLeft" || event.key === "a") {
+      player.vx = -player.speed;
+    } else if (event.key === "ArrowRight" || event.key === "d") {
+      player.vx = player.speed;
+    }
   }
 }
 
 window.onkeyup = function checkKeyUp(event) {
-  if (event.key === "ArrowUp" || event.key === "w") {
-    player.vy = 0;
-  } else if (event.key === "ArrowDown" || event.key === "s") {
-    player.vy = 0;
-  } else if (event.key === "ArrowLeft" || event.key === "a") {
-    player.vx = 0;
-  } else if (event.key === "ArrowRight" || event.key === "d") {
-    player.vx = 0;
+  if (_PLAYER) {
+    if (event.key === "ArrowUp" || event.key === "w") {
+      player.vy = 0;
+    } else if (event.key === "ArrowDown" || event.key === "s") {
+      player.vy = 0;
+    } else if (event.key === "ArrowLeft" || event.key === "a") {
+      player.vx = 0;
+    } else if (event.key === "ArrowRight" || event.key === "d") {
+      player.vx = 0;
+    }
   }
 }

@@ -22,14 +22,14 @@
 // concepts you'll run across in this file. A constant variable is just one that
 // cannot be changed later on. You can think of it as settings for the game. Go
 // ahead and change them and see how the game changes. 
-const _PERCENT_GAIN_ON_WIN = 0.2; // Percent of radius player gains by eating another
-const _CIRCLES = 200; // Number of initial circles
+const _PERCENT_GAIN_ON_WIN = 0.3; // Percent of radius player gains by eating another
+const _CIRCLES = 100; // Number of initial circles
 const _MIN_SIZE = 5; // Minimum initial size
 const _MAX_SIZE = 15; // Maximum initial size
-const _COLLISIONS = false; // Detect collisions (and eating) between objects
+const _COLLISIONS = true; // Detect collisions (and eating) between objects
 const _DEBUG = false; // Draw vectors and indices
 const _ADD_CIRCLE_WHEN_EATEN = true; // Keep creating new objects when ones get eaten
-const _PLAYER = false; // Enable the user-controllable player
+const _PLAYER = true; // Enable the user-controllable player
 
 // Generates random number between min and max
 function random(min, max) {

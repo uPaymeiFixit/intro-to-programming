@@ -13,7 +13,7 @@ This is by no means a perfect or complete course. If you finish chapter 10 and w
 - [Kahn Academy](https://www.khanacademy.org/computing/computer-programming/programming) is yet another 
 - [Codecademy](https://www.codecademy.com/courses/introduction-to-javascript/lessons/introduction-to-javascript/) is another great online interactive course.
 - [MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects) has information on JavaScript APIs I may not have covered in the course. For example, you can click on [_Math_](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math) on the originally linked page to see all of the functions available in the Math API.
-- [Stack Overflow](https://stackoverflow.com/) is a forum dedecated to programming problems. If you Google an error message or a concept you're curious about and add _JavaScript_ to the search, you're bound to end up on a Stack Overflow page at some point. But if you can't find what you're looking for there feel free to shoot me an email.
+- [Stack Overflow](https://stackoverflow.com/) is a forum dedicated to programming problems. If you Google an error message or a concept you're curious about and add _JavaScript_ to the search, you're bound to end up on a Stack Overflow page at some point. But if you can't find what you're looking for there feel free to shoot me an email.
 - [HTML Color Codes](https://htmlcolorcodes.com/color-picker/) will make it easier to pick and visualize colors when you get to chapter 2.
 
 
